@@ -1,19 +1,27 @@
 import React, { useContext, useState } from "react";
 import "./SignUpForm.css";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { firebase } from "../../firebase/config";
+import { FirebaseContext } from "../context/FirebaseContext";
 
 
 const SignUpForm = () => {
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    const auth = useContext(getAuth())
-    
+    const { firebase } = useContext(FirebaseContext);
+
     return (
         <div className="container">
             <form 
             onSubmit={(event) => {
                 event.preventDefault()
+                firebase
+                    .auth()
+                    .createUserWithEmailAndPassword(email, password)
+                    .then(() => alert("sign up"))
+                    .catch((error) => alert(error.message));
+                /*
                 createUserWithEmailAndPassword(auth, email, password)
                     .then((userCredential) => {
                         // Signed in 
@@ -25,6 +33,7 @@ const SignUpForm = () => {
                     const errorMessage = error.message;
                     // ..
                 });
+                */
                 setEmail("");
                 setPassword("")
             }}
