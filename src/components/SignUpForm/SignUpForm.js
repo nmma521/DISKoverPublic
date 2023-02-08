@@ -1,26 +1,23 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import "./SignUpForm.css";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { firebase } from "../../firebase/config";
-import { FirebaseContext } from "../context/FirebaseContext";
+import { useAuth } from "../../context/AuthContext";
+import { WEB_APP } from "../../constants/routes";
+import { useHistory } from "react-router-dom";
 
 
 const SignUpForm = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const history = useHistory();
 
-    const { firebase } = useContext(FirebaseContext);
+    const auth = useAuth();
 
     return (
         <div className="container">
             <form 
             onSubmit={(event) => {
                 event.preventDefault()
-                firebase
-                    .auth()
-                    .createUserWithEmailAndPassword(email, password)
-                    .then(() => alert("sign up"))
-                    .catch((error) => alert(error.message));
+                auth.signup({email, password, callback: () => history.push(WEB_APP)})
                 /*
                 createUserWithEmailAndPassword(auth, email, password)
                     .then((userCredential) => {
