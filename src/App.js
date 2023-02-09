@@ -10,15 +10,21 @@ import NavigationBar from './components/NavigationBar';
 import Hero from './components/Hero';
 import SignUpForm from "./components/SignUpForm/SignUpForm";
 import PrivateRoute from "./components/PrivateRoute";
-import WebApp from "./pages/WebApp";
+import WebApp from "./pages/WebApp/WebApp";
+import LoginForm from "./components/LoginForm/LoginForm";
+import { useAuth } from "./context/AuthContext";
 
 function App() {
-  return (
+  const {isLoading} = useAuth()
+  return isLoading ? (
+    <h1>Hold on, loading...</h1>
+  ) : (
     <Router>
       <NavigationBar/>
       <Switch>
         <Route exact path={ROUTES.SIGN_UP} component={SignUpForm} />
-        <PrivateRoute>
+        <Route exact path={ROUTES.LOGIN} component={LoginForm} />
+        <PrivateRoute path={ROUTES.WEB_APP}>
           <WebApp />
         </PrivateRoute>
         <Route exact path={ROUTES.HOME} component={Hero}/>

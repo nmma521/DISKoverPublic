@@ -1,7 +1,3 @@
-import React from "react";
-
-const WebApp = () => {
-    return <h1>hi</h1>;
-}
+import WebApp from "./WebApp";
 
 export default WebApp;
