@@ -1,0 +1,12 @@
+.SettingPanel {
+    opacity: 0.75;
+    color: gray;
+    position: fixed;
+    top: 4%;
+    right: 10%;
+}
+
+.button {
+    margin-top: auto;
+    color: white;
+}
