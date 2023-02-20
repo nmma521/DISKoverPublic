@@ -3,6 +3,7 @@ import "./NavigationBar.css";
 import { Link } from "react-router-dom";
 import * as ROUTES from '../../constants/routes'
 import { useAuth } from "../../context/AuthContext";
+import SettingPanel from "../SettingPanel/SettingPanel";
 const NavigationBar = () => {
   const auth = useAuth();
     return (
@@ -31,6 +32,7 @@ const NavigationBar = () => {
               )}
               
             </ul>
+            <SettingPanel/>
           </nav>
         </header>
     );

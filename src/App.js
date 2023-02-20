@@ -13,7 +13,9 @@ import PrivateRoute from "./components/PrivateRoute";
 import WebApp from "./pages/WebApp/WebApp";
 import LoginForm from "./components/LoginForm/LoginForm";
 import { useAuth } from "./context/AuthContext";
-
+import ContactUs from "./pages/ContactUs/ContactUs";
+import Recommendation from "./pages/Recommendation/Recommendation";
+import Playlist from "./pages/Playlist/Playlist";
 function App() {
   const {isLoading} = useAuth()
   return isLoading ? (
@@ -24,6 +26,9 @@ function App() {
       <Switch>
         <Route exact path={ROUTES.SIGN_UP} component={SignUpForm} />
         <Route exact path={ROUTES.LOGIN} component={LoginForm} />
+        <Route path={ROUTES.CONTACT_US}> <ContactUs/> </Route>
+        <Route path={ROUTES.RECOMMENDATION}> <Recommendation/> </Route>
+        <Route path={ROUTES.PLAYLIST}> <Playlist/> </Route>
         <PrivateRoute path={ROUTES.WEB_APP}>
           <WebApp />
         </PrivateRoute>

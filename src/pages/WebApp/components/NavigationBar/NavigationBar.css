@@ -1,0 +1,16 @@
+.WebAppNavBar {
+    width: 100%;
+    background: black;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.button {
+    color: white;
+}
+
+.margin {
+    margin-left: 10;
+}

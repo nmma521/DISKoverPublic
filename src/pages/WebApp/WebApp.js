@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import NavigationBar from "./components//NavigationBar/NavigationBar";
 import "./WebApp.css"
 
 const CLIENT_ID = "d9f307b6668446e78096051746b9ff21"
@@ -39,17 +40,40 @@ const WebApp = () => {
             console.log({ access_token });
             localStorage.clear();
             localStorage.setItem("accessToken", access_token)
+            localStorage.setItem("tokenType", token_type)
+            localStorage.setItem("expiresIn", expire_in)
             
+
         }
     })
     const handleLogin = () => {
         window.location = `${SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URL_AFTER_LOGIN}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`;
     };
 
+    const handleTimeout = () => {
+        localStorage.setItem('accessToken', "1");
+        console.log("test");
+        console.log(localStorage.getItem('accessToken'))
+        window.location.reload(false);
+    }
+
     return (
         <div className="container">
-            <h1>hi</h1>
-            <button onClick={handleLogin}>Login to spotify</button>
+
+        {localStorage.getItem('accessToken') != "1" ? (
+            <>
+            <h1>logged in</h1>
+            <button onClick={handleTimeout}>out</button>
+            <NavigationBar/>
+            
+
+            </>
+              ) : (
+                <>
+                <h1>hi</h1>
+                <button onClick={handleLogin}>Login to spotify</button>
+                </>
+              )}
         </div>
     )
 }
