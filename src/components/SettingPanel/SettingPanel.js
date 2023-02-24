@@ -12,6 +12,12 @@ const SettingPanel = () => {
       <div className="ContactUs">
             <Dropdown title="Setting" className="SettingPanel">
                 <Link className="button" to={ROUTES.CONTACT_US}>contact us</Link>
+                <a>  </a>
+                <Link className="button" to={ROUTES.REPORT_BUG}>report bug</Link>
+                <br/>
+                <Link className="button" to={ROUTES.FAQ}>Frequently Asked Questions</Link>
+                <a>  </a>
+                <Link className="button" to={ROUTES.TNC}>Terms & Conditions</Link>                
             </Dropdown>
         </div>
     );

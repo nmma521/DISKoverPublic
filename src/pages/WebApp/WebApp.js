@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import NavigationBar from "./components//NavigationBar/NavigationBar";
 import "./WebApp.css"
+import axios from "axios";
 
 const CLIENT_ID = "d9f307b6668446e78096051746b9ff21"
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize"
@@ -29,6 +30,8 @@ const getReturnParamsFromSpotifyAuth = (hash) => {
 }
 
 const WebApp = () => {
+    const [token, setToken] = useState("");
+
     useEffect(() => {
         if (window.location.hash) {
             const {
@@ -42,6 +45,7 @@ const WebApp = () => {
             localStorage.setItem("accessToken", access_token)
             localStorage.setItem("tokenType", token_type)
             localStorage.setItem("expiresIn", expire_in)
+            setToken(access_token);
             
 
         }
@@ -49,6 +53,22 @@ const WebApp = () => {
     const handleLogin = () => {
         window.location = `${SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URL_AFTER_LOGIN}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`;
     };
+
+    const searchArtists = async (e) => {
+        e.preventDefault()
+        const {data} = await axios.get("https://api.spotify.com/v1/search", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            params: {
+                q: "hello",
+                type: "artist"
+            }
+        })
+
+        console.log(data);
+    }
+
 
     const handleTimeout = () => {
         localStorage.setItem('accessToken', "1");
@@ -64,6 +84,7 @@ const WebApp = () => {
             <>
             <h1>logged in</h1>
             <button onClick={handleTimeout}>out</button>
+            <button className="Playlistbutton" onClick={searchArtists}>Get Playlists</button>
             <NavigationBar/>
             
 
@@ -72,6 +93,7 @@ const WebApp = () => {
                 <>
                 <h1>hi</h1>
                 <button onClick={handleLogin}>Login to spotify</button>
+                
                 </>
               )}
         </div>

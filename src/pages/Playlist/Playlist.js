@@ -1,43 +1,39 @@
 import React, { useEffect, useState } from "react";
-import "./Playlist.css";
 import axios from "axios";
+import "./Playlist.css";
 
-const END_POINT = "https://api.spotify.com/v1/me/playlists?limit=10&offset=5" -H "Accept: application/json" -H "Content-Type: application/json" -H "Authorization: Bearer ";
+const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/search";
 
 const Playlist = () => {
-    const [token, setToken] = useState("");
-    const [data, setData] = useState({});
+  const [token, setToken] = useState("");
 
-    
-    useEffect(() => {
-        if (localStorage.getItem("accessToken")) {
-          setToken(localStorage.getItem("accessToken"));
+  useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+      setToken(localStorage.getItem("accessToken"));
+      console.log("asd");
+      console.log(token);
+      console.log("asd");
+    }
+  }, []);
+
+  const searchArtists = async (e) => {
+    e.preventDefault()
+    const {data} = await axios.get("https://api.spotify.com/v1/search", {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        params: {
+            q: "hello",
+            type: "artist"
         }
+    })
+}
 
-        axios
-        .get(PLAYLISTS_ENDPOINT, {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        })
-        .then((response) => {
-          setData(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-
-      }, []);
-
-    return (
-        <>
-        <div className="Playlist">
-            <button>Apply Filter</button>
-            {data?.items ? data.items.map((item) => <p>{item.name}</p>) : null}
-        </div>
-        </>
-
-    );
+  return (
+    <>
+      <button className="Playlistbutton" onClick={searchArtists}>Get Playlists</button>
+    </>
+  );
 };
 
 export default Playlist;

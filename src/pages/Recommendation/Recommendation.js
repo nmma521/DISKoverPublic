@@ -22,8 +22,12 @@ const  Recommendation = () => {
           value={checked}
           onChange={handleChange}
         />
+        
   
         <p>Is "My Value" checked? {checked.toString()}</p>
+        <div>
+          <button> Filter </button>
+        </div>
       </div>
     );
   };
