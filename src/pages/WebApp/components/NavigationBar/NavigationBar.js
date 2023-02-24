@@ -2,6 +2,7 @@ import React from "react";
 import "./NavigationBar.css";
 import * as ROUTES from '../../../../constants/routes'
 import { Link } from "react-router-dom";
+import { Box, Container } from '@chakra-ui/react'
 import { useAuth } from "../../../../context/AuthContext";
 const NavigationBar = () => {
 
@@ -12,7 +13,12 @@ const NavigationBar = () => {
 }
 
     return (
-        <header className="WebAppNavBar">
+      <Container
+      opacity={'0.5'}>
+        <header className="WebAppNavBar" >
+
+
+
           <nav>
           <Link to={ROUTES.WEB_APP}>Home</Link>
           <br></br>
@@ -22,7 +28,9 @@ const NavigationBar = () => {
           <br></br>
           <Link onClick={handleTimeout} to={ROUTES.WEB_APP}>Logout</Link>
           </nav>
+
         </header>
+        </Container>
     );
   };
 
