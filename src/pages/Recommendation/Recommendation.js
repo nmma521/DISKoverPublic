@@ -1,30 +1,43 @@
 import React from "react";
 import "./Recommendation.css"
-import NavigationBar from "../WebApp/components/NavigationBar/NavigationBar";
 
 const  Recommendation = () => {
 
     const [checked, setChecked] = React.useState(false);
+    const [list2, setList2] = React.useState(false);
+    const [list3, setList3] = React.useState(false);
 
     const handleChange = () => {
       setChecked(!checked);
+    };
+
+    const handleChange2 = () => {
+      setList2(!list2);
+    };
+
+
+    const handleChange3 = () => {
+      setList3(!list3);
     };
   
     return (
       <div className="Recommendation">
         <Checkbox
-          label="My Value"
+          label="choice 1"
           value={checked}
           onChange={handleChange}
         />
         <Checkbox
-          label="My Value"
-          value={checked}
-          onChange={handleChange}
+          label="choice 2"
+          value={list2}
+          onChange={handleChange2}
         />
-        
-  
-        <p>Is "My Value" checked? {checked.toString()}</p>
+        <Checkbox
+          label="choice 3"
+          value={list3}
+          onChange={handleChange3}
+        />
+
         <div>
           <button> Filter </button>
         </div>
