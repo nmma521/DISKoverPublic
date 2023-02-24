@@ -11,6 +11,7 @@ import imageBackground from "./backgroundImg";
 import { Playlist } from "../Playlist/Playlist";
 import { yieldExpression } from "@babel/types";
 
+
 //import querystring from 'querystring'
 // import * as dotenv from 'dotenv';
 // dotenv.config();
@@ -35,7 +36,6 @@ const SCOPES = [
   "user-top-read",
   "playlist-modify-public",
   "playlist-modify-private"
-
 ];
 
 const SCOPES_URL_PARAM = SCOPES.join(SPACE_DELIMITER);
@@ -143,7 +143,6 @@ const WebApp = () => {
 
     return (
         <Container
-
         h='100%' 
         w='100%'
         backgroundImage={imageBackground}
@@ -157,6 +156,8 @@ const WebApp = () => {
             <>
             <Center>
                 <VStack>
+
+            <h1>logged in</h1>
                 <Playlist/>
                 <TopTracks/>
                 <Button onClick={handleBackground}>dark mode</Button>
@@ -181,9 +182,6 @@ const WebApp = () => {
                 </Center>
                 </>
               )}
-
-    
-
         </div>
         </Container>
     )

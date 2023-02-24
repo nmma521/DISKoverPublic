@@ -4,9 +4,11 @@ import React from "react"
 import { Button, Box, List, ListItem, Input, Center, VStack } from "@chakra-ui/react";
 import { Global } from "@emotion/react";
 
+
 export function Playlist () {
 
   const [trackList, setList] = useState([])
+
 
   const CLIENT_ID = "d9f307b6668446e78096051746b9ff21"
   const SECRET_ID = "980b6d0c977a40f4a77ccb4535d602b0"
@@ -54,6 +56,5 @@ export function Playlist () {
         </Box>
         </>
     );
-
 };
 

@@ -25,24 +25,25 @@ export function TopTracks () {
 
     const TOP_TRACKS_ENDPOINT = `https://api.spotify.com/v1/me/top/tracks`
 
-    // const getTopTracks = async () => {
-    //     console.log("getting")
+    const getTopTracks = async () => {
+        console.log("getting")
         
-    //     console.log(localStorage.getItem('accessToken'))
-    //     var list = fetch(TOP_TRACKS_ENDPOINT, {
-    //       headers: {
-    //         Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-    //       },
-    //     })
+        console.log(localStorage.getItem('accessToken'))
+        var list = fetch(TOP_TRACKS_ENDPOINT, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+        })
         
-    //     console.log(list)
+        console.log(list)
     
-    //     // console.log(list)
-    //     console.log("done")
-    //     console.log("farts")
-    //     //return list;
+        // console.log(list)
+        console.log("done")
+        console.log("farts")
+        //return list;
     
-    // }
+    }
+
     var displayedList = []
 
     const getTheTopTracks = async() => {
@@ -83,7 +84,6 @@ export function TopTracks () {
                 {message_string}
                 ; Popularity Statistic According to Spotify: {popularity}/100
 
-
               </ListItem>
               </Box>
             )
@@ -94,11 +94,18 @@ export function TopTracks () {
 
           });
           console.log(trackList);
-//          console.log(track_one)
-
         }, function(err) {
           console.log('fart\n', err);
         })
+
+
+
+
+      
+
+
+
+
     }
     function handleTopTracks(e) {
         getTheTopTracks(e)
@@ -131,5 +138,4 @@ export function TopTracks () {
         </Box>
         </>
     );
-
 }
