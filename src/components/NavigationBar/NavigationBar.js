@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import * as ROUTES from '../../constants/routes'
 import { useAuth } from "../../context/AuthContext";
 import SettingPanel from "../SettingPanel/SettingPanel";
+import ViewCounter from "./ViewCounter";
 const NavigationBar = () => {
   const auth = useAuth();
     return (
@@ -33,6 +34,7 @@ const NavigationBar = () => {
               
             </ul>
             <SettingPanel/>
+            <ViewCounter />
           </nav>
         </header>
     );
