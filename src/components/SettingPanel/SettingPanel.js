@@ -17,10 +17,7 @@ const SettingPanel = () => {
                 <br/>
                 <Link className="button" to={ROUTES.FAQ}>Frequently Asked Questions</Link>
                 <a>  </a>
-                <Link className="button" to={ROUTES.TNC}>Terms & Conditions</Link>  
-                <div>
-                    <a href="https://github.com/leo3266/DISKover">View Our Git Repositories</a>
-                </div>     
+                <Link className="button" to={ROUTES.TNC}>Terms & Conditions</Link>                
             </Dropdown>
         </div>
     );

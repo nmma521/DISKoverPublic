@@ -1,17 +1,16 @@
 
-import Axios from "axios"
 import { useState } from "react"
 import React from "react"
 import { Button, Box, List, ListItem, Input, Center, VStack } from "@chakra-ui/react";
-import { Global } from "@emotion/react";
 
 
-export function TopTracks () {
+export function TopTracksByArtist () {
 
   const [trackList, setList] = useState([])
+  const [genreList, setGen] = useState([])
 
-  const CLIENT_ID = "b3c1e974291a42c991e8c0d41c4f261d"//"d9f307b6668446e78096051746b9ff21"
-  const SECRET_ID = "b82534052d72482fa9746e9b31e87c8b"//"980b6d0c977a40f4a77ccb4535d602b0"
+  const CLIENT_ID = "d9f307b6668446e78096051746b9ff21"
+  const SECRET_ID = "980b6d0c977a40f4a77ccb4535d602b0"
   const REDIRECT_URI = "http://localhost:3000/callback"
 
   var SpotifyWebApi = require('spotify-web-api-node');
@@ -20,31 +19,6 @@ export function TopTracks () {
     clientSecret: SECRET_ID,
     redirectUri: REDIRECT_URI
   })
-
-
-
-    const TOP_TRACKS_ENDPOINT = `https://api.spotify.com/v1/me/top/tracks`
-
-    const getTopTracks = async () => {
-        console.log("getting")
-        
-        console.log(localStorage.getItem('accessToken'))
-        var list = fetch(TOP_TRACKS_ENDPOINT, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          },
-        })
-        
-        console.log(list)
-    
-        // console.log(list)
-        console.log("done")
-        console.log("farts")
-        //return list;
-    
-    }
-
-    var displayedList = []
 
     const getTheTopTracks = async() => {
 
@@ -56,54 +30,45 @@ export function TopTracks () {
         console.log(result)
         spotifyApi.setAccessToken(result)
 
-        spotifyApi.getMyTopTracks()
+        spotifyApi.getMyTopArtists()
         .then(function(data) {
-
+            console.log(data)
           topTracks = data.body.items
 
           var tracks = []
+          var genre = []
 
           topTracks.forEach(function(track, index) {
-            var message_string = "" + (index + 1) + '. ' + track.name + ' by '
-            var popularity = track.popularity
+            var name = track.name;
+            var currGenre = track.genres;
+            genre.push(
+                <Box p="5px">
+                <ListItem key='index'>
+  
+                  {currGenre}
+                  
+                </ListItem>
+                </Box>
+            );
 
-            for (var i = 0; i < track.artists.length; i++) {
-              console.log(track.artists[i].name)
-              if (i != track.artists.length - 1) {
-                message_string += track.artists[i].name + ', '
-              }
-              else {
-                message_string += track.artists[i].name
-              }
-            }
-            console.log(message_string)
             tracks.push(
               <Box p="5px">
               <ListItem key='index'>
 
-                {message_string}
-                ; Popularity Statistic According to Spotify: {popularity}/100
-
+                {name}
+                
               </ListItem>
               </Box>
             )
 
 
             setList(tracks)
-
-
+            setGen(genre)
           });
           console.log(trackList);
         }, function(err) {
           console.log('fart\n', err);
         })
-
-
-
-
-      
-
-
 
 
     }
@@ -118,7 +83,7 @@ export function TopTracks () {
         TopTracks
         <Box w="100%">
             <Center>
-            <Button w="600px" onClick={handleTopTracks} id="categoryButton">Get My Top Tracks</Button>
+            <Button w="600px" onClick={handleTopTracks} id="categoryButton">Get My Top Artists & Genres</Button>
 
             </Center>
 
@@ -131,6 +96,15 @@ export function TopTracks () {
 
             {trackList}
 
+          </List>
+
+            Genre:
+          <List>
+            {genreList.at(0)}
+            {genreList.at(1)}
+            {genreList.at(2)}
+            {genreList.at(3)}
+            {genreList.at(4)}
           </List>
           </VStack>
 
