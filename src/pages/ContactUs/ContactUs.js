@@ -26,13 +26,12 @@ const ContactUs = () => {
             Contact Us
         </div>
       <div>
-        <input className="textbox"placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)} required />
+        <input placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)} required />
       </div>
 
       <div>
-        <input className="textbox" placeholder="Message here" value={input} onChange={e=>setInput(e.target.value)}required />
+        <input placeholder="Message here" value={input} onChange={e=>setInput(e.target.value)}required />
       </div>
-
       <div>
         <button onClick={handleSubmit}> Send a message </button>
       </div>

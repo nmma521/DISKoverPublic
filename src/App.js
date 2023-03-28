@@ -13,13 +13,12 @@ import SignUpForm from "./components/SignUpForm/SignUpForm";
 import PrivateRoute from "./components/PrivateRoute";
 import WebApp from "./pages/WebApp/WebApp";
 import LoginForm from "./components/LoginForm/LoginForm";
-import { useAuth } from "./context/AuthContext";
-import ContactUs from "./pages/ContactUs/ContactUs";
 import ReportBug from "./pages/ReportBug/ReportBug";
 import FAQ from "./pages/FAQ/FAQ";
 import TNC from "./pages/TNC/TNC";
+import { useAuth } from "./context/AuthContext";
+import ContactUs from "./pages/ContactUs/ContactUs";
 import Recommendation from "./pages/Recommendation/Recommendation";
-import Playlist from "./pages/Playlist/Playlist";
 
 // import * as dotenv from 'dotenv';
 // dotenv.config();
@@ -39,7 +38,7 @@ function App() {
         <Route path={ROUTES.FAQ}> <FAQ/> </Route>
         <Route path={ROUTES.TNC}> <TNC/> </Route>
         <Route path={ROUTES.RECOMMENDATION}> <Recommendation/> </Route>
-        <Route path={ROUTES.PLAYLIST}> <Playlist/> </Route>
+        {/* <Route path={ROUTES.PLAYLIST}> <Playlist/> </Route> */}
         <PrivateRoute path={ROUTES.WEB_APP}>
           <WebApp />
         </PrivateRoute>
