@@ -17,7 +17,7 @@ function ViewCounter() {
 
   return (
     <div>
-      <p>Number of views: {viewCount}</p>
+      <p>Number of views: {Math.round((parseInt(viewCount) + 1) / 2)}</p>
     </div>
   );
 }
