@@ -10,6 +10,7 @@ import goku from './img/goku.jpg'
 import imageBackground from "./backgroundImg";
 import { Playlist } from "../Playlist/Playlist";
 import { yieldExpression } from "@babel/types";
+import { TopTracksByArtist } from "../top_tracks/TopTrackByArtist";
 
 
 //import querystring from 'querystring'
@@ -112,11 +113,6 @@ const WebApp = () => {
     };
 
 
-
-    const handleData = () => {
-        
-    }
-
     const handleTimeout = () => {
         localStorage.setItem('accessToken', "1");
         console.log("test");
@@ -160,6 +156,7 @@ const WebApp = () => {
             <h1>logged in</h1>
                 <Playlist/>
                 <TopTracks/>
+                <TopTracksByArtist/>
                 <Button onClick={handleBackground}>dark mode</Button>
                 <button onClick={handleTimeout}>out</button>
             </VStack>
