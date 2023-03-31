@@ -6,8 +6,8 @@ export function GetByTopArtist () {
 
   const [trackList, setList] = useState([])
 
-  const CLIENT_ID = "b3c1e974291a42c991e8c0d41c4f261d"//"d9f307b6668446e78096051746b9ff21"
-  const SECRET_ID = "b82534052d72482fa9746e9b31e87c8b"//"980b6d0c977a40f4a77ccb4535d602b0"
+  const CLIENT_ID = "d9f307b6668446e78096051746b9ff21"
+  const SECRET_ID = "980b6d0c977a40f4a77ccb4535d602b0"
   const REDIRECT_URI = "http://localhost:3000/callback"
 
   var SpotifyWebApi = require('spotify-web-api-node');
