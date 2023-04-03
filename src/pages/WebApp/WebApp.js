@@ -139,10 +139,11 @@ const WebApp = () => {
 
     return (
         <Container
-        h='100%' 
-        w='100%'
+        h='cover' 
+        w='cover'
         backgroundImage={imageBackground}
-        bgSize='100%'
+        backgroundPosition="center"
+        bgSize='cover'
         backgroundRepeat='no-repeat'
         align="center"
         overflowY={"scroll"}
@@ -151,15 +152,25 @@ const WebApp = () => {
         {localStorage.getItem('accessToken') != "1" ? (
             <>
             <Center>
-                <VStack>
-
-            <h1>logged in</h1>
-                <Playlist/>
+                <Box borderRadius='lg'
+                borderWidth="1 px"
+                backgroundColor="black"
+                opacity={0.60}
+                padding="10px" >
+                <VStack >
+                    <Box color={'white'}>
+                    <h1>Welcome to DISKover!</h1>
+                    <h1>This Website is used to view your Spotify Data </h1>
+                    <h1>and to get recommendations based on it. </h1>
+                    <h1>Give it a try by pressing one of the buttons! </h1>
+                    </Box>
                 <TopTracks/>
                 <TopTracksByArtist/>
+                <Playlist/>
                 <Button onClick={handleBackground}>dark mode</Button>
                 <button onClick={handleTimeout}>out</button>
             </VStack>
+            </Box>
             </Center>
             
             <NavigationBar/>
@@ -168,15 +179,33 @@ const WebApp = () => {
             </>
               ) : (
                 <>
-                <Center overflowY={'scroll'}>
+                     <Center>
+  
+                    <VStack>
+                    <Box color={'white'}
+                                    borderRadius='lg'
+                                    borderWidth="1 px"
+                                    backgroundColor="black"
+                                    opacity={0.60}
+                                    padding="10px"
+                                    w='500%' 
+                                    h='200%'>
+                    <h1>Log into Spotify to get started!</h1>
+                    <h1>This is another app that analyzes</h1>
+                    <h1>your listening data. Give it a shot!</h1>
+                    <VStack>
 
-                <VStack >
 
-                <h1>hi</h1>
-                <button onClick={handleLogin}>Login to spotify</button>
-                </VStack>
+                    <Button onClick={handleBackground}>dark mode</Button>
+                    <Button onClick={handleLogin}>Login to spotify</Button>
+                    </VStack>
+                    </Box>
 
-                </Center>
+
+                    </VStack>
+
+                    </Center>
+
                 </>
               )}
         </div>
