@@ -8,7 +8,7 @@ import ViewCounter from "./ViewCounter";
 const NavigationBar = () => {
   const auth = useAuth();
     return (
-        <header className="NavigationBar">
+        <header className="NavigationBar" >
           <nav>
             <ul>
               <Link to={ROUTES.HOME}>
