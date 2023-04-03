@@ -25,25 +25,6 @@ export function TopTracks () {
 
     const TOP_TRACKS_ENDPOINT = `https://api.spotify.com/v1/me/top/tracks`
 
-    const getTopTracks = async () => {
-        console.log("getting")
-        
-        console.log(localStorage.getItem('accessToken'))
-        var list = fetch(TOP_TRACKS_ENDPOINT, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          },
-        })
-        
-        console.log(list)
-    
-        // console.log(list)
-        console.log("done")
-        console.log("farts")
-        //return list;
-    
-    }
-
     var displayedList = []
 
     const getTheTopTracks = async() => {
@@ -56,7 +37,7 @@ export function TopTracks () {
         console.log(result)
         spotifyApi.setAccessToken(result)
 
-        spotifyApi.getMyTopTracks()
+        spotifyApi.getMyTopTracks( { limit: 50 })
         .then(function(data) {
 
           topTracks = data.body.items
@@ -88,24 +69,13 @@ export function TopTracks () {
               </Box>
             )
 
-
             setList(tracks)
-
 
           });
           console.log(trackList);
         }, function(err) {
           console.log('fart\n', err);
         })
-
-
-
-
-      
-
-
-
-
     }
     function handleTopTracks(e) {
         getTheTopTracks(e)
@@ -115,19 +85,21 @@ export function TopTracks () {
 
   return (
         <>
-        TopTracks
+        <Box color={'white'}>
+
+        See Top Tracks
+        </Box>
         <Box w="100%">
             <Center>
             <Button w="600px" onClick={handleTopTracks} id="categoryButton">Get My Top Tracks</Button>
 
             </Center>
-
         </Box>
         <Box padding="5px" w="100%" width={"800px"}>
           <VStack maxH='230px'overflow="hidden" overflowY={'scroll'}>
 
 
-          <List>
+          <List color={'white'}>
 
             {trackList}
 
