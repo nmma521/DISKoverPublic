@@ -1,4 +1,4 @@
-import { Button, Box, List, ListItem, Input, Center, VStack } from "@chakra-ui/react";
+import { Button, Box, List, ListItem, Input, Center, VStack, Container } from "@chakra-ui/react";
 import { Select, MenuItem, FormHelperText, FormControl, InputLabel } from '@material-ui/core';
 import React, { useState } from 'react';
 
@@ -118,9 +118,23 @@ export function GenreDropdown() {
 
 
   return (
-    <div>
-    <FormControl style={{ marginTop: 100, marginLeft: 0 }}>
-      <InputLabel>Genre</InputLabel>
+    <>
+
+        <Box
+        borderRadius='lg'
+        borderWidth="1 px"
+        padding="10px">
+          <Center>
+
+    <VStack>
+
+
+    <FormControl style={{ marginTop: 100, marginLeft: 0 }}
+    backgroundColor={'white'}>
+
+      <InputLabel backgroundColor={'white'} color={'white'}>Genre</InputLabel>
+
+
       <Select value={selected} onChange={selectionChangeHandler}>
         <MenuItem value={"pop"}>POP</MenuItem>
         <MenuItem value={"happy"}>HAPPY</MenuItem>
@@ -129,12 +143,17 @@ export function GenreDropdown() {
         <MenuItem value={"classical"}>CLASSICAL</MenuItem>
       </Select>
       <FormHelperText>select a genre</FormHelperText>
-      <Button onClick={handleClick}> find music based on genre</Button>
     </FormControl>
+    <Button onClick={handleClick}> find music based on genre</Button>
+
+
+
+
 
     
     <>
-        <Box padding="1px" w="100%" width={"800px"}>
+        <Box padding="1px" w="100%" width={"800px"}
+        color={'white'}>
           <VStack maxH='800px'overflow="hidden" overflowY={'scroll'}>
           <List>
 
@@ -146,7 +165,10 @@ export function GenreDropdown() {
 
         </Box>
     </>
-    </div>
+    </VStack>
+    </Center>
+    </Box>
+    </>
 
   );
 }
