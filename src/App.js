@@ -19,6 +19,9 @@ import TNC from "./pages/TNC/TNC";
 import { useAuth } from "./context/AuthContext";
 import ContactUs from "./pages/ContactUs/ContactUs";
 import Recommendation from "./pages/Recommendation/Recommendation";
+import { TopTracks } from "./pages/top_tracks/TopTracks";
+import TopTrackPage from "./pages/WebApp/TopTrackPage"
+import { Playlist } from "./pages/Playlist/Playlist";
 
 // import * as dotenv from 'dotenv';
 // dotenv.config();
@@ -29,15 +32,18 @@ function App() {
     <h1>Hold on, loading...</h1>
   ) : (
     <Router>
-      <NavigationBar/>
+
       <Switch>
         <Route exact path={ROUTES.SIGN_UP} component={SignUpForm} />
         <Route exact path={ROUTES.LOGIN} component={LoginForm} />
         <Route path={ROUTES.CONTACT_US}> <ContactUs/> </Route>
         <Route path={ROUTES.REPORT_BUG}> <ReportBug/> </Route>
-        <Route path={ROUTES.FAQ}> <FAQ/> </Route>
+        <Route path={ROUTES.PLAYLIST}> <Playlist/> </Route>
         <Route path={ROUTES.TNC}> <TNC/> </Route>
         <Route path={ROUTES.RECOMMENDATION}> <Recommendation/> </Route>
+        <Route path={ROUTES.TOP_TRACKS}>
+          <TopTrackPage/>
+        </Route>
         {/* <Route path={ROUTES.PLAYLIST}> <Playlist/> </Route> */}
         <PrivateRoute path={ROUTES.WEB_APP}>
           <WebApp />
