@@ -1,6 +1,6 @@
 import { useState } from "react"
 import React from "react"
-import { Button, Box, List, ListItem, Input, Center, VStack, Container } from "@chakra-ui/react";
+import { Button, Box, List, ListItem, Link, Input, Center, VStack, Container, StackDivider } from "@chakra-ui/react";
 import imageBackground from "../../WebApp/backgroundImg";
 
 export function GetByTopArtist () {
@@ -75,10 +75,17 @@ export function GetByTopArtist () {
 
             tracks.push(
               //[trackName, artistName, duration, explicit, url]
-              <Box
-              >
+              <Box p='5px'>
               <ListItem key='index'>
-                Track Name: {trackName}  
+                Track Name: {" "} 
+                <Link 
+                color="#38A169"
+                fontWeight={'bold'}
+                href={link} 
+                isExternal="true">
+                  {trackName}
+
+                </Link>
               </ListItem>
 
               <ListItem key='index'>
@@ -92,14 +99,6 @@ export function GetByTopArtist () {
               <ListItem key='index'>
                 Explicit : {explicit}  
               </ListItem>
-
-              <a href={link} target="_blank">
-                <Button
-                  variant="contained"
-                  className="py-1 px-2">
-                    <i className="ri-upload-2-line pe-2"></i> link
-                </Button>
-              </a>
 
               </Box>
               );
@@ -130,34 +129,34 @@ export function GetByTopArtist () {
 
 
   return (
-        <>
 
-        <Box         
-        w="100%"
-        p="5px" 
+        <VStack
+        id="loginForm"
+        divider={<StackDivider borderColor='gray.200' />}
+        spacing="5px"
+        align='stretch'
+        color='black'>
 
-        color={'white'}>
-            <Center>
-
-
-
-
-        
-        <Box padding="1px" w="100%" width={"800px"}>
-          <VStack maxH='800px'overflow="hidden" overflowY={'scroll'}>
-          <Button w="600px" onClick={handleTopTracks} id="categoryButton">
-            Get recommendation based on listening history
-          </Button>
-          <List>
-
+        <VStack 
+        height='339px'
+        overflow="hidden"
+          overflowY={'scroll'}>
+          <List
+          color={'black'}>
             {trackList}
-
           </List>
-          </VStack>
-        </Box>
-        </Center>
-        </Box>
+        </VStack>
 
-        </>
+        <Center>
+        <Button w="300px" 
+        onClick={handleTopTracks}
+        id="trackButton"
+        width="100%"
+        style={{ marginTop: 15}}>
+            Get Recommendations
+        </Button>
+        </Center>
+        </VStack>
+
     );
 }

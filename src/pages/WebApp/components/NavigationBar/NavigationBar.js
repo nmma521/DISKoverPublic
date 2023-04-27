@@ -2,36 +2,48 @@ import React from "react";
 import "./NavigationBar.css";
 import * as ROUTES from '../../../../constants/routes'
 import { Link } from "react-router-dom";
-import { Box, Container } from '@chakra-ui/react'
+import { Box, Button, Container } from '@chakra-ui/react'
 import { useAuth } from "../../../../context/AuthContext";
-const NavigationBar = () => {
+import ViewCounter from "../../../../components/NavigationBar/ViewCounter"
+
+const NavigationBar2 = () => {
+
+  function home(e) {
+    window.location='/webapp'
+  }
 
   const handleTimeout = () => {
     localStorage.setItem('accessToken', "1");
     console.log(localStorage.getItem('accessToken'))
     window.location.reload(false);
+    home();
 }
 
     return (
-      <Container
-      opacity={'0.5'}>
-        <header className="WebAppNavBar" >
+
+        <Container 
+        opacity={0.8}
+        height="50px"
+        width='100%'
+        className="WebAppNavBar" >
+
+          <Box
+          height='10px'
+          m='10px'
+          >
+          <ViewCounter/>
+          </Box>
+          <Link onClick={handleTimeout} to={ROUTES.WEB_APP}>
+
+            Logout
+
+            </Link>
 
 
-
-          <nav>
-          <Link to={ROUTES.WEB_APP}>Home</Link>
-          <br></br>
-          <Link to={ROUTES.RECOMMENDATION}>Recommendation</Link>
-          <br></br>
-          <Link className="margin" to={ROUTES.PLAYLIST}>My Library</Link>
-          <br></br>
-          <Link onClick={handleTimeout} to={ROUTES.WEB_APP}>Logout</Link>
-          </nav>
-
-        </header>
         </Container>
+
+
     );
   };
 
-  export default NavigationBar
+  export default NavigationBar2

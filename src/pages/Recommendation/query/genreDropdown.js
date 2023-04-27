@@ -1,6 +1,7 @@
-import { Button, Box, List, ListItem, Input, Center, VStack, Container } from "@chakra-ui/react";
+import { Button, Box, List, ListItem, Input, Center, HStack, Link, VStack, Container, StackDivider } from "@chakra-ui/react";
 import { Select, MenuItem, FormHelperText, FormControl, InputLabel } from '@material-ui/core';
 import React, { useState } from 'react';
+import NavigationBar2 from "../../WebApp/components/NavigationBar/NavigationBar";
 
 export function GenreDropdown() {
   const [selected, setSelected] = useState("None");
@@ -68,7 +69,15 @@ export function GenreDropdown() {
                 //[trackName, artistName, duration, explicit, url]
                 <Box p="5px">
                 <ListItem key='index'>
-                  Track Name: {trackName}  
+                  Track Name: {" "}
+                  <Link
+                  href={link} 
+                  isExternal='true'
+                  fontWeight='bold'
+                  color='#38A169'
+                  >
+                  {trackName}  
+                  </Link>
                 </ListItem>
       
                 <ListItem key='index'>
@@ -83,13 +92,6 @@ export function GenreDropdown() {
                   Explicit : {explicit}  
                 </ListItem>
       
-                <a href={link} target="_blank">
-                  <Button
-                    variant="contained"
-                    className="py-1 px-2">
-                      <i className="ri-upload-2-line pe-2"></i> link
-                  </Button>
-                </a>
       
                 </Box>
                 );
@@ -118,23 +120,33 @@ export function GenreDropdown() {
 
 
   return (
-    <>
 
-        <Box
-        borderRadius='lg'
-        borderWidth="1 px"
-        padding="10px">
-          <Center>
+    <VStack
+        id="loginForm"
+        divider={<StackDivider borderColor='gray.200' />}
+        spacing="5px"
+        align='stretch'
+        color='black'
+    >
+    <VStack 
+        height='303px'
+        overflow="hidden"
+         overflowY={'scroll'}>
+          <List>
+            {trackList}
+          </List>
+    </VStack>
 
-    <VStack>
+    <Center>
+    <HStack spacing={19}>
+    <FormControl 
 
-
-    <FormControl style={{ marginTop: 100, marginLeft: 0 }}
+    style={{ minWidth: 475 }}
     backgroundColor={'white'}>
 
-      <InputLabel backgroundColor={'white'} color={'white'}>Genre</InputLabel>
-
-
+      <InputLabel backgroundColor={'white'} 
+      color={'white'}
+      >Genre</InputLabel>
       <Select value={selected} onChange={selectionChangeHandler}>
         <MenuItem value={"pop"}>POP</MenuItem>
         <MenuItem value={"happy"}>HAPPY</MenuItem>
@@ -144,32 +156,19 @@ export function GenreDropdown() {
       </Select>
       <FormHelperText>select a genre</FormHelperText>
     </FormControl>
-    <Button onClick={handleClick}> find music based on genre</Button>
 
+    <Button 
+    onClick={handleClick}
+    id="trackButton"
+    width="475px"
+    style={{ marginTop: 15}}> 
 
+    Get Recommendations
 
-
-
-    
-    <>
-        <Box padding="1px" w="100%" width={"800px"}
-        color={'white'}>
-          <VStack maxH='800px'overflow="hidden" overflowY={'scroll'}>
-          <List>
-
-            {trackList}
-
-          </List>
-          </VStack>
-
-
-        </Box>
-    </>
-    </VStack>
+    </Button>
+    </HStack>
     </Center>
-    </Box>
-    </>
-
+    </VStack>
   );
 }
 

@@ -4,7 +4,7 @@ import React from "react"
 import { Button, Box, List, ListItem, Input, Center, VStack, Modal,
    ModalOverlay, ModalContent, ModalHeader, useDisclosure, Textarea,
    ModalCloseButton, ModalBody, FormControl, FormLabel, ModalFooter, Container,
-  Text } from "@chakra-ui/react";
+  Text, StackDivider } from "@chakra-ui/react";
 
 
 export function TopTracksByArtist () {
@@ -32,40 +32,6 @@ export function TopTracksByArtist () {
   /**
    * Sorting function for dictionary
    */
-  function sort_dictionary(dictionary) {
-      // create array of key value pairs for genres
-      var dictItems = Object.keys(dictionary).map(
-        (key) => {
-          return[key, dictionary[key]]
-        }
-      );
-
-      //sort them by value/second element
-      console.log("items")
-      console.log(dictItems);
-
-      dictItems.sort(
-        (first, second) => {
-          return second[1] - first[1]
-        }
-      );
-
-      console.log("sorted items")
-      console.log(dictItems);
-      // get sorted keys in order
-
-      var sorted_items = dictItems.map(
-        (e) => {
-          return e[0]
-        }
-      );
-      console.log("here are genres\n");
-      console.log(sorted_items);
-      return sorted_items;
-  }
-
-
-
     const getTopArtists = async() => {
 
         var result = localStorage.getItem("accessToken")
@@ -91,21 +57,19 @@ export function TopTracksByArtist () {
             var message_string = "" + (index + 1) + ". " + artist.name
             
             artistNames.push(
-              <Box p='5px'>
 
 
               <ListItem key='index'>
                 <Button
-                w="600px"
+                w="300px"
                 onClick={handleTopArtistTracks}
                 id={artist.id}
                 backgroundColor={'white'}
-                opacity={'100%'}
                 > 
                 {message_string}
               </Button>
               </ListItem>
-              </Box>
+
             )
             ids.push(id)
             setList(artistNames)
@@ -123,64 +87,7 @@ export function TopTracksByArtist () {
 
     }
 
-    //get top genres
 
-    const getTopGenres = async() => {
-
-      var result = localStorage.getItem("accessToken")
-      var topArtists
-      spotifyApi.setAccessToken(result)
-
-      spotifyApi.getMyTopArtists({limit : 50})
-      .then(function(data) {
-
-
-        topArtists = data.body.items  //fetch top artists
-
-        var genre = []
-        //dictionary form for genres
-        var genreDict = {}
-
-        topArtists.forEach(function(artist, index) {
-          
-          var currGenre = artist.genres;
-
-          //set up the dictionary
-          for (var i = 0; i < currGenre.length; i++) {
-
-            var genre_string = "" + currGenre[i];
-
-            if(!(genre_string in genreDict)) {
-              genreDict[genre_string] = 1;
-            }
-            else {
-              genreDict[genre_string]++;
-            }
-          }
-
-        });
-        var sortedGenres = sort_dictionary(genreDict);
-        console.log(sortedGenres);
-
-
-        for (var i = 0; i < 5; i++) {
-          var message_string = "" + (i + 1) + ". " + sortedGenres[i];
-          console.log(message_string)
-          genre.push(
-            <Box p="5px">
-              <ListItem key='index'>
-                {message_string}
-              </ListItem>
-            </Box>
-          )
-        }
-        setGen(genre)
-
-      }, function(err) {
-        console.log('fart\n', err);
-      })
-
-    }
     async function getTopArtistTracks(e) {
 
       e.preventDefault();
@@ -224,11 +131,6 @@ export function TopTracksByArtist () {
         getTopArtists(e)
         e.preventDefault();
     };
-
-    function handleTopGenres(e) {
-      getTopGenres(e)
-      e.preventDefault();
-  };
     function handleTopArtistTracks(e) {
       getTopArtistTracks(e)
       e.preventDefault()
@@ -238,10 +140,9 @@ export function TopTracksByArtist () {
 
   return (
         <>
-        <Container>
         <Modal onClose={onClose}
         isOpen={isOpen} 
-        isCentered
+        isCentered="true"
         size={'sm'}
         >
         <ModalOverlay />
@@ -251,13 +152,11 @@ export function TopTracksByArtist () {
 
 
             <Box backgroundColor={'black'}
-            opacity={'80%'}
-            m="2%"
-            w='50%'
-            h='60%'
-            p={9}
+            opacity={'100%'}
+            m="3.5%"
             borderRadius="2%"
-            borderColor='gray.200'
+            w='40%'
+            h='57%'
             alignContent={"center"}
             alignItems="center"
             overflow="hidden"
@@ -269,9 +168,7 @@ export function TopTracksByArtist () {
             
             >
               <VStack 
-              m="50px 50px 0 50px" 
-              alignContent={"center"}
-              alignItems="center" 
+              m="50px 60px 0 50px" 
               borderRadius="8px"
               borderColor={'black'}
               >
@@ -293,46 +190,35 @@ export function TopTracksByArtist () {
       </Modal>
 
 
-        <Box w="100%" 
-        color={'white'} 
-        alignItems={'center'}>
-          See Top Artists
-            <Center>
-            <Button
-             w="600px" onClick={handleTopArtists} id="genreButton">Get My Top Artists
-            </Button>
-            </Center>
-        </Box>
+          <VStack
+            id="loginForm"
+            divider={<StackDivider borderColor='black' />}
+            spacing="5px"
+            align='stretch'
+            color='black'
+          >
+          <VStack height='374px'
+          overflow="hidden" 
+          overflowY={'scroll'}
+          			divider={<StackDivider borderColor='gray.200' />}>
 
-        <Box padding="5px" w="100%" width={"800px"}>
-          <Center>
-          <VStack maxH='230px'overflow="hidden" overflowY={'scroll'}>
+          
           <List color={'white'}>
             {artistList}
           </List>
           </VStack>
+
+          <Center>
+          <Button
+            width="100%" 
+            onClick={handleTopArtists} 
+            id="artistButton"
+            style={{ marginTop: 15}}>
+              Get My Top Artists!
+          </Button>
           </Center>
-        </Box>
-
-        <Box w="100%" color={'white'}>
-          See Top Genres
-          <Center>
-            <Button
-             w="600px" onClick={handleTopGenres} id="genreButton">Get My Top Genres
-            </Button>
-            </Center>
-        </Box>
-
-        <Box padding="5px" w="100%" width={"800px"}>
-          <Center>
-          <VStack maxH='230px'overflow="hidden" overflowY={'scroll'}>
-          <List color={'white'}>
-            {genreList}
-          </List>
           </VStack>
-          </Center>
-        </Box>
-        </Container>
+
 
 
         </>

@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
-import NavigationBar from "./components//NavigationBar/NavigationBar";
+import NavigationBar2 from "./components//NavigationBar/NavigationBar";
 import "./WebApp.css"
 import querystring from 'querystring-es3'
 import { TopTracks } from "../top_tracks/TopTracks";
-import { Button, Box, Container, List, ListItem, Input, Center, VStack } from "@chakra-ui/react";
-import Axios from "axios";
-import segg from './img/segg.jpg'
-import goku from './img/goku.jpg'
+import { Button, Box, Container, Image, List, ListItem, Input, Center, VStack, Text, Heading,
+Stack } from "@chakra-ui/react";
 import imageBackground from "./backgroundImg";
+import logo2 from "./img/logo2.png"
+import spotifyplaybutton from "./img/spotifyplaybutton.gif"
 import { Playlist } from "../Playlist/Playlist";
 import { yieldExpression } from "@babel/types";
 import { TopTracksByArtist } from "../top_tracks/TopTrackByArtist";
+import NavigationBar from "../../components/NavigationBar";
 
 
 //import querystring from 'querystring'
@@ -45,24 +46,9 @@ http://localhost:3000/webapp#access_token=BQACufk8w8iQlZzgf0QUQxd8iErE8vkdHeSn5d
 */
 
 
-
-const getAccessToken = async () => {
-    
-    const response = await fetch(TOKEN_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        Authorization: `Basic ${BASE64_ID}`,
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-        body: querystring.stringify({
-        grant_type: 'refresh_token',
-        REFRESH_TOKEN,
-       }),
-    })
-    var output = response.json()
-    console.log({output})
-    return output
-}
+function home(e) {
+    window.location='/webapp'
+  }
   
 
 
@@ -104,6 +90,7 @@ const WebApp = () => {
             console.log("here is the token "+ {access_token});
             localStorage.setItem("tokenType", token_type)
             localStorage.setItem("expiresIn", expire_in)
+            home();
             
 
         }
@@ -123,57 +110,140 @@ const WebApp = () => {
 
 
 
-    const handleBackground = () => {
-        var type = localStorage.getItem('imageType');
-        if (type == 0) {
-            localStorage.setItem('imageType', 1);
-            console.log("new var " + localStorage.getItem('imageType'))
-            window.location.reload(true)
-        }
-        else {
-            localStorage.setItem('imageType', 0);
-            console.log("new var " + localStorage.getItem('imageType'))
-            window.location.reload(true)
-        }
-    }
 
     return (
-        <Container
-        h='cover' 
-        w='cover'
-        backgroundImage={imageBackground}
-        backgroundPosition="center"
-        bgSize='cover'
-        backgroundRepeat='no-repeat'
-        align="center"
-        overflowY={"scroll"}
->
-        <div className="container">
+        <Container maxW='100%'
+        h='calc(100vh)' 
+        backgroundRepeat="no-repeat"
+        bgSize="100%"
+        backgroundImage={imageBackground} 
+        align="center">
+
         {localStorage.getItem('accessToken') != "1" ? (
             <>
-            <Center>
-                <Box borderRadius='lg'
-                borderWidth="1 px"
-                backgroundColor="black"
-                opacity={0.60}
-                padding="10px" >
-                <VStack >
-                    <Box color={'white'}>
-                    <h1>Welcome to DISKover!</h1>
-                    <h1>This Website is used to view your Spotify Data </h1>
-                    <h1>and to get recommendations based on it. </h1>
-                    <h1>Give it a try by pressing one of the buttons! </h1>
-                    </Box>
-                <TopTracks/>
-                <TopTracksByArtist/>
-                <Playlist/>
-                <Button onClick={handleBackground}>dark mode</Button>
-                <button onClick={handleTimeout}>out</button>
-            </VStack>
-            </Box>
-            </Center>
-            
             <NavigationBar/>
+            <Center>
+                <Box m="10% 0 0 0"
+                bg="white"
+                w="1000px"
+                h="495px"
+                p={12}
+                borderWidth="10px"
+                sx={{ borderRadius: "1.75%"}}
+                >
+
+                    <VStack 
+                    opacity={'100%'}
+                    m="2.5%"
+                    borderRadius="2%"
+                    spacing={9}
+                    alignItems="center"
+                    overflow="hidden"
+                    overflowY={'scroll'}
+
+                    color={'black'}>
+                    <Image
+                    src={logo2}
+                    width="90%"
+                    />
+                    <Text></Text>
+                    <Heading
+                    >Welcome to DISKover!</Heading>
+
+                    <Heading></Heading>
+
+                    <Text
+                    as="u"
+                    fontWeight={'bold'}>Here's a guide to help you navigate the site {":)"} </Text>
+                    <Text></Text>
+                    <Text >
+                        <li>
+                            <Text
+                            as='u'
+                            fontWeight={'bold'}
+                            color="green"
+                            >View Top Tracks: 
+                            </Text>
+                            {" "} Get top tracks, artists, and genres
+                            </li>
+                    </Text>
+                    <Text>
+                        <li>
+                            <Text
+                            as='u'
+                            fontWeight={'bold'}
+                            color="green"
+                            > 
+                            Get Recommendations:
+                            </Text>
+                            
+                            {" "}Get a series of randomized recommendations based on your listening history or a genre
+                            </li>
+                    </Text>
+                    <Text>
+                        <li>
+                            <Text
+                            as='u'
+                            fontWeight={'bold'}
+                            color="green"
+                            > 
+                            Make a Playlist: 
+                            </Text>
+
+                            {" "} Create a Spotify playlist using a description and name 
+                            </li>
+                    </Text>
+                    <Text>
+                        <li>
+                            <Text
+                            as='u'
+                            fontWeight={'bold'}
+                            color="green"
+                            > 
+                            Report Bug: 
+                            </Text>
+
+                            {" "} Send us a note if you encounter any bugs on the site 
+                            
+                        </li>
+                    </Text>
+                    <Text>
+                        <li>
+                        <Text
+                            as='u'
+                            fontWeight={'bold'}
+                            color="green"
+                            > 
+                            Terms and Conditions:
+                            </Text>
+                            
+                           {" "} Our terms for using this website 
+                           </li>
+                    </Text>
+                    <Text>
+                        <li>
+                            <Text
+                            as='u'
+                            fontWeight={'bold'}
+                            color="green"
+                            > 
+                            Contact Us:
+                            </Text>
+                            {" "} Send us a note if you have any questions or comments {":)"} 
+                            </li>
+                    </Text>
+                    </VStack>
+                    </Box>
+                    
+                <VStack>
+
+
+                </VStack>
+
+                </Center>
+
+
+            <NavigationBar2/>
             
 
             </>
@@ -183,34 +253,66 @@ const WebApp = () => {
   
                     <VStack>
                     <Box color={'white'}
-                                    borderRadius='lg'
-                                    borderWidth="1 px"
-                                    backgroundColor="black"
-                                    opacity={0.60}
-                                    padding="10px"
-                                    w='500%' 
-                                    h='200%'>
-                    <h1>Log into Spotify to get started!</h1>
-                    <h1>This is another app that analyzes</h1>
-                    <h1>your listening data. Give it a shot!</h1>
-                    <VStack>
+                        h='calc(100vh)' 
+                        width={"2000px"}
+                        bgSize="100%"
+                        align="center"
+                        borderRadius='lg'
+                        borderWidth="1 px"
+                        backgroundColor="black"
+                    >
+                    <VStack
+                    m="140px"
+                    >
+                    <Image
+                    src={logo2}
+                    width={'60%'}
+                    />
+                    <Text>
+                        By Yiting An, Jefferson Chandra, Leo Lee, and Nathan Ma
+                     </Text>
+                     <Text>
+                     </Text>
+                     <Text>
+                     </Text>
+                     <Text>
+                     </Text>
+                    <Heading
+                    size={'6xl'}
+                    > Press Play </Heading>
+
+                    <Image
+                    src={spotifyplaybutton}
+                    width={'10%'}
+                     onClick={handleLogin}
+                     />
 
 
-                    <Button onClick={handleBackground}>dark mode</Button>
-                    <Button onClick={handleLogin}>Login to spotify</Button>
                     </VStack>
                     </Box>
 
-
                     </VStack>
-
                     </Center>
 
                 </>
               )}
-        </div>
+
         </Container>
     )
 }
 
 export default WebApp;
+
+// const handleBackground = () => {
+//     var type = localStorage.getItem('imageType');
+//     if (type == 0) {
+//         localStorage.setItem('imageType', 1);
+//         console.log("new var " + localStorage.getItem('imageType'))
+//         window.location.reload(true)
+//     }
+//     else {
+//         localStorage.setItem('imageType', 0);
+//         console.log("new var " + localStorage.getItem('imageType'))
+//         window.location.reload(true)
+//     }
+// }

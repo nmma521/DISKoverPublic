@@ -2,7 +2,7 @@
 import Axios from "axios"
 import { useState } from "react"
 import React from "react"
-import { Button, Box, List, ListItem, Input, Center, VStack } from "@chakra-ui/react";
+import { Button, Box, List, Link, ListItem, Input,Center, VStack, StackDivider } from "@chakra-ui/react";
 import { Global } from "@emotion/react";
 
 
@@ -41,13 +41,15 @@ export function TopTracks () {
         .then(function(data) {
 
           topTracks = data.body.items
+          console.log(topTracks)
 
           var tracks = []
 
           topTracks.forEach(function(track, index) {
-            var message_string = "" + (index + 1) + '. ' + track.name + ' by '
-            var popularity = track.popularity
-
+            var track_name = "" + track.name
+            var message_string = ' by '
+            var link = "" + track.external_urls.spotify;
+            console.log(track.uri)
             for (var i = 0; i < track.artists.length; i++) {
               console.log(track.artists[i].name)
               if (i != track.artists.length - 1) {
@@ -57,15 +59,22 @@ export function TopTracks () {
                 message_string += track.artists[i].name
               }
             }
-            console.log(message_string)
             tracks.push(
               <Box p="5px">
               <ListItem key='index'>
+              {index + 1}. {" "}
+                <Link 
+                color="#38A169"
+                fontWeight='bold'
+                href={link}
+                isExternal='true'>
+                  {track_name}
 
+
+                </Link>
                 {message_string}
-                ; Popularity Statistic According to Spotify: {popularity}/100
-
               </ListItem>
+
               </Box>
             )
 
@@ -84,30 +93,36 @@ export function TopTracks () {
 
 
   return (
-        <>
-        <Box color={'white'}>
+        <VStack
+        id="loginForm"
+        divider={<StackDivider borderColor='gray.200' />}
+              spacing="5px"
+              align='stretch'
+              color='black'
+      >
+        <VStack 
+        height='374px'
+        overflow="hidden"
+         overflowY={'scroll'}>
+        <List color={'black'}>
 
-        See Top Tracks
-        </Box>
-        <Box w="100%">
-            <Center>
-            <Button w="600px" onClick={handleTopTracks} id="categoryButton">Get My Top Tracks</Button>
+          {trackList}
 
-            </Center>
-        </Box>
-        <Box padding="5px" w="100%" width={"800px"}>
-          <VStack maxH='230px'overflow="hidden" overflowY={'scroll'}>
+        </List>
+        </VStack>
 
+        <Center>
+        <Button w="300px"
 
-          <List color={'white'}>
+         onClick={handleTopTracks} 
+         id="trackButton"
+          width="100%"
+          style={{ marginTop: 15}}
 
-            {trackList}
+         >Get My Top Tracks!
+         </Button>
+        </Center>
 
-          </List>
-          </VStack>
-
-
-        </Box>
-        </>
+        </VStack>	
     );
 }
