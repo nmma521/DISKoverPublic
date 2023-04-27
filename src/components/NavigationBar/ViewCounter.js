@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {Box, Text} from '@chakra-ui/react'
 
 function ViewCounter() {
   const [viewCount, setViewCount] = useState(0);
@@ -16,9 +17,11 @@ function ViewCounter() {
   }, []);
 
   return (
-    <div>
+    <Box
+    m='-10px'
+    >
       <p>Number of views: {Math.round((parseInt(viewCount) + 1) / 2)}</p>
-    </div>
+    </Box>
   );
 }
 
