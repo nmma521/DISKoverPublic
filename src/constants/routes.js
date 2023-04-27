@@ -8,3 +8,4 @@ export const FAQ = "/faq";
 export const TNC = "/tnc";
 export const RECOMMENDATION = "/webapp/recommendation";
 export const PLAYLIST = "/webapp/playlist";
+export const TOP_TRACKS = "/webapp/toptracks";
