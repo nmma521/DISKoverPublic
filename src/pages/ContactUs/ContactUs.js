@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import "./ContactUs.css";
 import { useAuth } from "../../context/AuthContext";
 import { db } from "../../firebase/config";
+import NavigationBar from "../../components/NavigationBar";
+import NavigationBar2 from "../WebApp/components/NavigationBar/NavigationBar";
+import {Box, Button, Center, Container, Heading, Text, VStack } from "@chakra-ui/react"
+import { Input, InputGroup, InputRightElement } from "@chakra-ui/input"
+import { FormControl, FormLabel } from "@chakra-ui/form-control";
+import imageBackground from "../WebApp/backgroundImg";
 
 const ContactUs = () => {
   const auth = useAuth();
@@ -21,21 +27,69 @@ const ContactUs = () => {
 
 
   return (
-    <form className="box">
-        <div>
-            Contact Us
-        </div>
-      <div>
-        <input placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)} required />
-      </div>
+    <Container maxW='100%'
+    h='calc(100vh)' 
+    backgroundRepeat="no-repeat"
+    bgSize="100%"
+    backgroundImage={imageBackground} 
+    align="center">
+      <NavigationBar/>
+      <Center>
+            <Box m="10% 0 0 0"
+            bg="white"
+            w="1000px"
+            h="495px"
+            p={11}
+            borderWidth="10px"
+            sx={{ borderRadius: "1.75%"}}
+            >
+            <Center>
+              <VStack
+              m='90px'
+              >
 
-      <div>
-        <input placeholder="Message here" value={input} onChange={e=>setInput(e.target.value)}required />
-      </div>
-      <div>
-        <button onClick={handleSubmit}> Send a message </button>
-      </div>
-    </form>
+            <Heading color={'black'}
+            fontWeight={'bold'}
+            > Contact Us
+             </Heading>
+
+          <FormControl
+          isRequired>
+
+          <Input 
+            w="550px" 
+            placeholder="email" 
+            value={email} 
+            onChange={e=>setEmail(e.target.value)} 
+         />
+
+
+          <Input 
+            w="550px" 
+            placeholder="Comment here" 
+            value={input} 
+            variant={'flushed'}
+            onChange={e=>setInput(e.target.value)}
+        />
+
+      </FormControl>
+
+
+      <Button
+      w="600px"
+      id="emailButton"
+      onClick={handleSubmit}
+      >
+  Send a message 
+  </Button>
+
+
+</VStack>
+</Center>
+</Box>
+</Center>
+<NavigationBar2/>
+  </Container>
   );
 };
 

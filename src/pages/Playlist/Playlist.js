@@ -1,11 +1,14 @@
 import "./Playlist.css";
 import { useState } from "react"
 import React from "react"
-import { Button, Box, List, ListItem, Input, Center, VStack, Textarea, Text,
+import { Button, Box, Center, Container, VStack, Textarea, Text,
   Checkbox
  } from "@chakra-ui/react";
-import { Global } from "@emotion/react";
-import { TextareaAutosize } from "@material-ui/core";
+ import { FormControl, FormLabel } from "@chakra-ui/form-control";
+ import { Input, InputGroup, InputRightElement } from "@chakra-ui/input"
+ import NavigationBar from "../../components/NavigationBar";
+import NavigationBar2 from "../WebApp/components/NavigationBar/NavigationBar";
+import imageBackground from "../WebApp/backgroundImg";
 
 
 export function Playlist () {
@@ -87,17 +90,57 @@ export function Playlist () {
 
 
   return (
-        <>
-        <Box w="100%"
+      <Container maxW='100%'
+      h='calc(100vh)' 
+      backgroundRepeat="no-repeat"
+      bgSize="100%"
+      backgroundImage={imageBackground} 
+      align="center">
+        <NavigationBar/>
+      <Center>
+        <Box m="10% 0 0 0"
+        bg="white"
+        w="1000px"
+        h="495px"
+        p={11}
+        borderWidth="10px"
+        sx={{ borderRadius: "1.75%"}}
         >
             <Center>
+            <VStack
+            m="90px">
 
-            <VStack>
-            <Text color={'white'}> Create a playlist here </Text>
-            <Textarea name="PlaylistName" w="100%" variant="flushed" placeholder='Enter Name of your playlist' onChange={handlePlaylistNameChange}/>
-            <Textarea name="PlaylistName" w="100%" variant="flushed" placeholder='Enter your playlist description' onChange={handlePlaylistDescChange}/>
+            <Text color={'black'}
+            fontWeight={'bold'}
+            > Create a playlist here!
+             </Text>
+
+            <FormControl 
+              name="PlaylistName"
+            >
+            <Input 
+                  name="PlaylistName"
+                  placeholder='Enter Name of your playlist here'
+                  onChange={handlePlaylistNameChange}
+                  w="550px" 
+                  variant="flushed"
+            />    
+            </FormControl>
+            <FormControl 
+              name="PlaylistDesc"
+            >
+            <Textarea 
+                  name="PlaylistDesc"
+                  placeholder='Enter your playlist description'
+                  onChange={handlePlaylistDescChange}
+                  w="650px" 
+                  h="100px"
+                  sx={{ wordWrap: 'normal' }}
+                  variant="flushed"
+            />    
+            </FormControl>
             <Checkbox
-            color={'white'}
+            color={'black'}
             onChange={handlePlaylistPrivChange}> Private </Checkbox>
 
             <Button w="600px" onClick={handlePlaylist} id="categoryButton">Make Playlist</Button>
@@ -105,7 +148,21 @@ export function Playlist () {
             </Center>
 
         </Box>
-        </>
+        </Center>
+        <NavigationBar2/>
+        </Container>
     );
 };
+
+
+
+
+
+
+
+
+
+
+
+    
 
