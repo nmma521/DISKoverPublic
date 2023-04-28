@@ -48,7 +48,10 @@ function App() {
         <PrivateRoute path={ROUTES.WEB_APP}>
           <WebApp />
         </PrivateRoute>
-        <Route exact path={ROUTES.HOME} component={Hero}/>
+        <Route 
+        path={ROUTES.HOME}>
+          <WebApp/>
+        </Route>
       </Switch>
     </Router>
     

@@ -1,11 +1,10 @@
 import { useState } from "react"
 import React from "react"
-import { Button, Box, List, ListItem, Link, Input, Center, VStack, Container, StackDivider } from "@chakra-ui/react";
-import imageBackground from "../../WebApp/backgroundImg";
-
-export function GetByTopArtist () {
+import { Button, Box, List, ListItem, Link, Image, Input, StackDivider, Center, VStack } from "@chakra-ui/react";
+export function GetByArtist () {
 
   const [trackList, setList] = useState([])
+  const [input, setInput]=useState('');
 
   const CLIENT_ID = "d9f307b6668446e78096051746b9ff21"
   const SECRET_ID = "980b6d0c977a40f4a77ccb4535d602b0"
@@ -30,25 +29,10 @@ export function GetByTopArtist () {
         console.log(result)
         spotifyApi.setAccessToken(result);
 
-        /* Get a User’s Top Artists*/
-        spotifyApi.getMyTopArtists()
-        .then(function(data) {
-        topArtists = data.body.items;
-        console.log(topArtists);
-
-        topArtists.forEach(function(track, index) {
-          var artist = "" + track.id;
-          seeds.push(artist);
-        });
-
         
         // Get Recommendations Based on Seeds
-        spotifyApi.getRecommendations({
-          min_energy: 0.4,
-          seed_artists: seeds.slice(0,5),
-          min_popularity: 50,
-          limit : 5 // num recommendation
-          })
+        var a = "artist:" + input
+        spotifyApi.searchTracks(a)
           .then(function(data) {
           //let recommendations = data.body;
 
@@ -57,7 +41,7 @@ export function GetByTopArtist () {
           var tracks = []
 
           
-          topTracks.tracks.forEach(function(track, index) {
+          topTracks.tracks.items.forEach(function(track, index) {
             var trackName = "" + track.name;
             var artistName = "";
             var duration = track.duration_ms * 0.00001667;
@@ -79,13 +63,16 @@ export function GetByTopArtist () {
                 <Box p='5px'>
 
                 <ListItem>
-                <video controls name="media">
+                <video 
+                controls name="media"
+                >
                   <source src={track.preview_url} type="video/mp4"/>
                 </video>
                 </ListItem>
                 <ListItem>
-                <img src={track.album.images[0].url} width="100" height="100">
-                  </img>
+                <Image
+                 src={track.album.images[0].url} width="100" height="100">
+                </Image>
                 </ListItem>
 
                 <ListItem key='index'>
@@ -134,9 +121,6 @@ export function GetByTopArtist () {
                 <ListItem key='index'>
                   Explicit : {explicit}  
                 </ListItem>
-
-
-  
                 </Box>
                 );
               } else {
@@ -144,7 +128,7 @@ export function GetByTopArtist () {
                   //[trackName, artistName, duration, explicit, url]
                   <Box p='5px'>
                   
-                  <br></br>
+
                   <ListItem>
                       Preview is not available!
                     </ListItem>
@@ -207,15 +191,14 @@ export function GetByTopArtist () {
             setList(tracks)
 
           });
+        
           //console.log(recommendations);
           }, function(err) {
           console.log("Something went wrong!", err);
           });
 
 
-        }, function(err) {
-        console.log('Something went wrong!', err);
-        });
+    
 
 
 
@@ -225,43 +208,59 @@ export function GetByTopArtist () {
 
 
     function handleTopTracks(e) {
-      setList([])
+        setList([]);
         getByTopArtist(e)
         e.preventDefault();
     };
 
 
   return (
-
-        <VStack
-        id="loginForm"
-        divider={<StackDivider borderColor='gray.200' />}
-        spacing="5px"
-        align='stretch'
-        color='black'>
+      <VStack
+      id="loginForm"
+      divider={<StackDivider borderColor='gray.200' />}
+      spacing="5px"
+      align='stretch'
+      color='black'>
 
         <VStack 
-        height='341px'
+        height='339px'
         overflow="hidden"
-          overflowY={'scroll'}>
+        overflowY={'scroll'}>
+
           <List
           color={'black'}>
             {trackList}
           </List>
-        </VStack>
 
+        </VStack>
         <Center>
-        <Button 
-  
-        w="300px" 
-        onClick={handleTopTracks}
-        id="trackButton"
-        width="100%"
-        style={{ marginTop: 15}}>
-            Get Recommendations
-        </Button>
-        </Center>
-        </VStack>
 
+
+        <VStack
+        m="-30px"
+        zIndex={'1'}
+        >
+        <Input 
+        id="outlined-basic"
+         label="Title" 
+         variant="outlined" 
+         width="975px"
+        value={input}
+         onChange={e=>setInput(e.target.value)} />
+
+         <Button 
+         variant="contained"
+         color="primary" 
+         onClick={handleTopTracks}
+         id="trackButton"
+         width="100%"
+
+         >Get Top Songs By This Artist
+         </Button>
+         </VStack>
+
+         </Center>
+
+      </VStack>
     );
 }

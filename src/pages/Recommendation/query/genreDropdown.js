@@ -65,36 +65,137 @@ export function GenreDropdown() {
                 }
               }
       
-              tracks.push(
-                //[trackName, artistName, duration, explicit, url]
-                <Box p="5px">
-                <ListItem key='index'>
-                  Track Name: {" "}
-                  <Link
-                  href={link} 
-                  isExternal='true'
-                  fontWeight='bold'
-                  color='#38A169'
-                  >
-                  {trackName}  
-                  </Link>
-                </ListItem>
+              if (track.preview_url != null) {
+                tracks.push(
+                  //[trackName, artistName, duration, explicit, url]
+                  <Box p='5px'>
+  
+                  <ListItem>
+                  <video controls name="media">
+                    <source src={track.preview_url} type="video/mp4"/>
+                  </video>
+                  </ListItem>
+                  <ListItem>
+                  <img src={track.album.images[0].url} width="100" height="100">
+                    </img>
+                  </ListItem>
+  
+                  <ListItem key='index'>
+                    Track Name: {" "} 
+                    <Link 
+                    color="#38A169"
+                    fontWeight={'bold'}
+                    href={link} 
+                    isExternal="true">
+                      {trackName}
+    
+                    </Link>
+                  </ListItem>
+    
+                  <ListItem key='index'>
+                    Artist(s): {" "} 
+                    <Link 
+                    color="#38A169"
+                    fontWeight={'bold'}
+                    href={track.artists[0].external_urls.spotify} 
+                    isExternal="true">
+                      {artistName}
+    
+                    </Link>
+                  </ListItem>
+  
+                  <ListItem key='index'>
+                    Album: {" "} 
+                    <Link 
+                    color="#38A169"
+                    fontWeight={'bold'}
+                    href={track.album.external_urls.spotify} 
+                    isExternal="true">
+                      {track.album.name}
+                    </Link>
+                  </ListItem>
+  
+                  <ListItem>
+                    Release Date: {track.album.release_date}
+                  </ListItem>
+  
+                  <ListItem key='index'>
+                    Duration: {Math.round(duration * 100) / 100} minutes 
+                  </ListItem>
+    
+                  <ListItem key='index'>
+                    Explicit : {explicit}  
+                  </ListItem>
+  
+  
+    
+                  </Box>
+                  );
+                } else {
+                  tracks.push(
+                    //[trackName, artistName, duration, explicit, url]
+                    <Box p='5px'>
+                    
+                    <br></br>
+                    <ListItem>
+                        Preview is not available!
+                      </ListItem>
+  
+                    <ListItem>
+                  <img src={track.album.images[0].url} width="100" height="100">
+                    </img>
+                  </ListItem>
+  
+                  <ListItem key='index'>
+                    Track Name: {" "} 
+                    <Link 
+                    color="#38A169"
+                    fontWeight={'bold'}
+                    href={link} 
+                    isExternal="true">
+                      {trackName}
+    
+                    </Link>
+                  </ListItem>
+    
+                  <ListItem key='index'>
+                    Artist(s): {" "} 
+                    <Link 
+                    color="#38A169"
+                    fontWeight={'bold'}
+                    href={track.artists[0].external_urls.spotify} 
+                    isExternal="true">
+                      {artistName}
+    
+                    </Link>
+                  </ListItem>
+  
+                  <ListItem key='index'>
+                    Album: {" "} 
+                    <Link 
+                    color="#38A169"
+                    fontWeight={'bold'}
+                    href={track.album.external_urls.spotify} 
+                    isExternal="true">
+                      {track.album.name}
+                    </Link>
+                  </ListItem>
+  
+                  <ListItem>
+                    Release Date: {track.album.release_date}
+                  </ListItem>
+  
+                  <ListItem key='index'>
+                    Duration: {Math.round(duration * 100) / 100} minutes 
+                  </ListItem>
+    
+                  <ListItem key='index'>
+                    Explicit : {explicit}  
+                  </ListItem>
       
-                <ListItem key='index'>
-                  Artist(s): {artistName} 
-                </ListItem>
-      
-                <ListItem key='index'>
-                  Duration: {Math.round(duration * 100) / 100} minutes 
-                </ListItem>
-      
-                <ListItem key='index'>
-                  Explicit : {explicit}  
-                </ListItem>
-      
-      
-                </Box>
-                );
+                    </Box>
+                    );
+                }
               setList(tracks)
       
             });
@@ -110,6 +211,7 @@ export function GenreDropdown() {
 
   function handleClick(e) {
     //getByGenre(e)
+    setList([])
     if(selected != "None") {
         getByGenre(e);
     }

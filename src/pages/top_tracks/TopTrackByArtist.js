@@ -168,7 +168,7 @@ export function TopTracksByArtist () {
             
             >
               <VStack 
-              m="50px 60px 0 50px" 
+              m="40px 60px 0 50px" 
               borderRadius="8px"
               borderColor={'black'}
               >
@@ -177,7 +177,10 @@ export function TopTracksByArtist () {
                   {artistTrackList}
                 </List>
 
-              <Button onClick={onClose}>Close</Button>
+              <Button
+              style={{ marginTop: -3}}
+               onClick={onClose}>Close</Button>
+
               </VStack>
 
             </Box>

@@ -8,6 +8,7 @@ import { Button, Box, Container, List, ListItem, Input, Center,
 import imageBackground from "../WebApp/backgroundImg";
 import NavigationBar from "../../components/NavigationBar";
 import NavigationBar2 from "../WebApp/components/NavigationBar/NavigationBar";
+import { GetByArtist } from "./query/getByArtist";
 
 const  Recommendation = () => {
   
@@ -47,6 +48,7 @@ const  Recommendation = () => {
                   <Tab 
                   width="50%">Get Recommendations Based on Listening History </Tab>
                   <Tab width="50%">Get Recommendations Based on Genre Select </Tab>
+                  <Tab width="50%">Get Recommendations Based on Artist </Tab>
 
               </TabList>
                 <TabPanels>
@@ -55,6 +57,9 @@ const  Recommendation = () => {
                   </TabPanel>
                   <TabPanel>
                       <GenreDropdown/>
+                  </TabPanel>
+                  <TabPanel>
+                      <GetByArtist/>
                   </TabPanel>
                 </TabPanels>
           </Tabs>

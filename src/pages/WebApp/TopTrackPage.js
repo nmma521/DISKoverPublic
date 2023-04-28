@@ -11,7 +11,6 @@ import goku from './img/goku.jpg'
 import imageBackground from "./backgroundImg";
 import { TopTracksByArtist } from "../top_tracks/TopTrackByArtist";  
 import { TopTracksByGenre } from "../top_tracks/TopTrackByGenre";
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 
 const TopTrackPage = () => {
 

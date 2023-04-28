@@ -46,38 +46,150 @@ export function TopTracks () {
           var tracks = []
 
           topTracks.forEach(function(track, index) {
-            var track_name = "" + track.name
-            var message_string = ' by '
+            var trackName = "" + track.name;
+            var artistName = "";
+            var duration = track.duration_ms * 0.00001667;
+            var explicit = "" + track.explicit;
             var link = "" + track.external_urls.spotify;
-            console.log(track.uri)
+
             for (var i = 0; i < track.artists.length; i++) {
-              console.log(track.artists[i].name)
               if (i != track.artists.length - 1) {
-                message_string += track.artists[i].name + ', '
+                artistName += track.artists[i].name + ', ';
               }
               else {
-                message_string += track.artists[i].name
+                artistName += track.artists[i].name;
               }
             }
-            tracks.push(
-              <Box p="5px">
-              <ListItem key='index'>
-              {index + 1}. {" "}
-                <Link 
-                color="#38A169"
-                fontWeight='bold'
-                href={link}
-                isExternal='true'>
-                  {track_name}
 
+            if (track.preview_url != null) {
+              tracks.push(
+                //[trackName, artistName, duration, explicit, url]
+                <Box>
 
-                </Link>
-                {message_string}
-              </ListItem>
+                <ListItem>
+                <video controls name="media">
+                  <source src={track.preview_url} type="video/mp4"/>
+                </video>
+                </ListItem>
 
-              </Box>
-            )
+                <ListItem>
+                <img src={track.album.images[0].url} width="100" height="100">
+                  </img>
+                </ListItem>
 
+                <ListItem key='index'>
+                  {index + 1}. Track Name: {" "} 
+                  <Link 
+                  color="#38A169"
+                  fontWeight={'bold'}
+                  href={link} 
+                  isExternal="true">
+                    {trackName}
+  
+                  </Link>
+                </ListItem>
+  
+                <ListItem key='index'>
+                  Artist(s): {" "} 
+                  <Link 
+                  color="#38A169"
+                  fontWeight={'bold'}
+                  href={track.artists[0].external_urls.spotify} 
+                  isExternal="true">
+                    {artistName}
+  
+                  </Link>
+                </ListItem>
+
+                <ListItem key='index'>
+                  Album: {" "} 
+                  <Link 
+                  color="#38A169"
+                  fontWeight={'bold'}
+                  href={track.album.external_urls.spotify} 
+                  isExternal="true">
+                    {track.album.name}
+                  </Link>
+                </ListItem>
+
+                <ListItem>
+                  Release Date: {track.album.release_date}
+                </ListItem>
+
+                <ListItem key='index'>
+                  Duration: {Math.round(duration * 100) / 100} minutes 
+                </ListItem>
+  
+                <ListItem key='index'>
+                  Explicit : {explicit}  
+                </ListItem>
+                </Box>
+                );
+              } else {
+                tracks.push(
+                  //[trackName, artistName, duration, explicit, url]
+                  <Box p='5px'>
+                  
+                  <br></br>
+                  <ListItem>
+                      Preview is not available!
+                    </ListItem>
+
+                  <ListItem>
+                <img src={track.album.images[0].url} width="100" height="100">
+                  </img>
+                </ListItem>
+
+                <ListItem key='index'>
+                  Track Name: {" "} 
+                  <Link 
+                  color="#38A169"
+                  fontWeight={'bold'}
+                  href={link} 
+                  isExternal="true">
+                    {trackName}
+  
+                  </Link>
+                </ListItem>
+  
+                <ListItem key='index'>
+                  Artist(s): {" "} 
+                  <Link 
+                  color="#38A169"
+                  fontWeight={'bold'}
+                  href={track.artists[0].external_urls.spotify} 
+                  isExternal="true">
+                    {artistName}
+  
+                  </Link>
+                </ListItem>
+
+                <ListItem key='index'>
+                  Album: {" "} 
+                  <Link 
+                  color="#38A169"
+                  fontWeight={'bold'}
+                  href={track.album.external_urls.spotify} 
+                  isExternal="true">
+                    {track.album.name}
+                  </Link>
+                </ListItem>
+
+                <ListItem>
+                  Release Date: {track.album.release_date}
+                </ListItem>
+
+                <ListItem key='index'>
+                  Duration: {Math.round(duration * 100) / 100} minutes 
+                </ListItem>
+  
+                <ListItem key='index'>
+                  Explicit : {explicit}  
+                </ListItem>
+    
+                  </Box>
+                  );
+              }
             setList(tracks)
 
           });
