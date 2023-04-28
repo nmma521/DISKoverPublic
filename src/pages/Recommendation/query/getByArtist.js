@@ -71,8 +71,9 @@ export function GetByArtist () {
                 </ListItem>
                 <ListItem>
                 <Image
-                 src={track.album.images[0].url} width="100" height="100">
-                </Image>
+                 src={track.album.images[0].url} 
+                 width="35%" 
+                 />
                 </ListItem>
 
                 <ListItem key='index'>
@@ -134,8 +135,10 @@ export function GetByArtist () {
                     </ListItem>
 
                   <ListItem>
-                <img src={track.album.images[0].url} width="100" height="100">
-                  </img>
+                  <Image
+                 src={track.album.images[0].url} 
+                 width="35%" 
+                 />
                 </ListItem>
 
                 <ListItem key='index'>
@@ -223,7 +226,7 @@ export function GetByArtist () {
       color='black'>
 
         <VStack 
-        height='339px'
+        height='324px'
         overflow="hidden"
         overflowY={'scroll'}>
 
@@ -237,7 +240,7 @@ export function GetByArtist () {
 
 
         <VStack
-        m="-30px"
+        m="-35px"
         zIndex={'1'}
         >
         <Input 
@@ -245,6 +248,7 @@ export function GetByArtist () {
          label="Title" 
          variant="outlined" 
          width="975px"
+         placeholder="Enter Artist Name"
         value={input}
          onChange={e=>setInput(e.target.value)} />
 
@@ -254,8 +258,10 @@ export function GetByArtist () {
          onClick={handleTopTracks}
          id="trackButton"
          width="100%"
+         fontSize='17px'
+         
 
-         >Get Top Songs By This Artist
+         >Get Recommendations From This Artist
          </Button>
          </VStack>
 

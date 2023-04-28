@@ -111,7 +111,9 @@ export function TopTracksByGenre () {
           console.log(message_string)
           genre.push(
             <Box p="5px">
-              <ListItem key='index'>
+              <ListItem key='index'
+              fontSize={'19px'}
+              >
                 {message_string}
               </ListItem>
             </Box>
@@ -141,9 +143,10 @@ export function TopTracksByGenre () {
               align='stretch'
               color='black'
       >
-        <VStack height='374px'
+        <VStack height='369px'
         overflow="hidden" 
         overflowY={'scroll'}
+        sx={{marginRight:38}}
         >
         <List color={'black'}>
         {genreList}
@@ -154,7 +157,9 @@ export function TopTracksByGenre () {
          onClick={handleTopGenres} 
          id="trackButton"
           width="100%"
-          style={{ marginTop: 15}}>
+          fontSize='17px'
+
+          style={{ marginTop: 2}}>
             Get My Top Genres
         </Button>
         </Center>

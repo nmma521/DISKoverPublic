@@ -1,4 +1,4 @@
-import { Button, Box, List, ListItem, Input, Center, HStack, Link, VStack, Container, StackDivider } from "@chakra-ui/react";
+import { Button, Box, List, ListItem, Image, Input, Center, HStack, Link, VStack, Container, StackDivider } from "@chakra-ui/react";
 import { Select, MenuItem, FormHelperText, FormControl, InputLabel } from '@material-ui/core';
 import React, { useState } from 'react';
 import NavigationBar2 from "../../WebApp/components/NavigationBar/NavigationBar";
@@ -76,8 +76,10 @@ export function GenreDropdown() {
                   </video>
                   </ListItem>
                   <ListItem>
-                  <img src={track.album.images[0].url} width="100" height="100">
-                    </img>
+                  <Image
+                 src={track.album.images[0].url} 
+                 width="35%" 
+                 />
                   </ListItem>
   
                   <ListItem key='index'>
@@ -142,8 +144,10 @@ export function GenreDropdown() {
                       </ListItem>
   
                     <ListItem>
-                  <img src={track.album.images[0].url} width="100" height="100">
-                    </img>
+                    <Image
+                    src={track.album.images[0].url} 
+                    width="35%" 
+                    />
                   </ListItem>
   
                   <ListItem key='index'>
@@ -231,7 +235,7 @@ export function GenreDropdown() {
         color='black'
     >
     <VStack 
-        height='303px'
+        height='287px'
         overflow="hidden"
          overflowY={'scroll'}>
           <List>
@@ -250,11 +254,23 @@ export function GenreDropdown() {
       color={'white'}
       >Genre</InputLabel>
       <Select value={selected} onChange={selectionChangeHandler}>
-        <MenuItem value={"pop"}>POP</MenuItem>
-        <MenuItem value={"happy"}>HAPPY</MenuItem>
-        <MenuItem value={"hip-hop"}>HIP-HOP</MenuItem>
-        <MenuItem value={"children"}>CHILDREN</MenuItem>
-        <MenuItem value={"classical"}>CLASSICAL</MenuItem>
+      <MenuItem value={"anime"}>ANIME</MenuItem>
+      <MenuItem value={"children"}>CHILDREN</MenuItem>
+      <MenuItem value={"dance"}>DANCE</MenuItem>
+      <MenuItem value={"dubstep"}>DUBSTEP</MenuItem>
+      <MenuItem value={"happy"}>HAPPY</MenuItem>
+      <MenuItem value={"hip-hop"}>HIP-HOP</MenuItem>
+      <MenuItem value={"house"}>HOUSE</MenuItem>
+      <MenuItem value={"indian"}>INDIAN</MenuItem>
+      <MenuItem value={"indie"}>INDIE</MenuItem>
+      <MenuItem value={"j-pop"}>JPOP</MenuItem>
+      <MenuItem value={"latino"}>LATINO</MenuItem>
+      <MenuItem value={"pop"}>POP</MenuItem>
+      <MenuItem value={"punk"}>PUNK</MenuItem>
+      <MenuItem value={"rock"}>ROCK</MenuItem>
+      <MenuItem value={"r-n-b"}>RNB</MenuItem>
+      <MenuItem value={"sleep"}>SLEEP</MenuItem>
+      <MenuItem value={"soundtracks"}>SOUNDTRACK</MenuItem>
       </Select>
       <FormHelperText>select a genre</FormHelperText>
     </FormControl>
@@ -263,7 +279,8 @@ export function GenreDropdown() {
     onClick={handleClick}
     id="trackButton"
     width="475px"
-    style={{ marginTop: 15}}> 
+    fontSize='17px'
+    style={{ marginTop: 11}}> 
 
     Get Recommendations
 

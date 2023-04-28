@@ -1,7 +1,7 @@
 
 import { useState } from "react"
 import React from "react"
-import { Button, Box, List, ListItem, Input, Center, VStack, Modal,
+import { Button, Box, List, ListItem, Image, Input, Center, VStack, Modal,
    ModalOverlay, ModalContent, ModalHeader, useDisclosure, Textarea,
    ModalCloseButton, ModalBody, FormControl, FormLabel, ModalFooter, Container,
   Text, StackDivider } from "@chakra-ui/react";
@@ -54,21 +54,38 @@ export function TopTracksByArtist () {
             //get name for message string
             var name = artist.name;
             var id = artist.id;
+            var image = artist.images[0].url
             var message_string = "" + (index + 1) + ". " + artist.name
             
             artistNames.push(
 
+              <Box
+              p='5px'
+              >
+              <ListItem>
+                <Image
+                src={image}
+                width={'20%'}
+                
+                />
+              </ListItem>
 
               <ListItem key='index'>
+
                 <Button
+                h="40px"
                 w="300px"
                 onClick={handleTopArtistTracks}
                 id={artist.id}
                 backgroundColor={'white'}
+                fontSize={'19px'}
                 > 
+
                 {message_string}
-              </Button>
+                </Button>
+
               </ListItem>
+              </Box>
 
             )
             ids.push(id)
@@ -108,8 +125,10 @@ export function TopTracksByArtist () {
             var message_string = "" + (i + 1) + ". " + topArtistTracks[i].name
             console.log(message_string)
             topArtistTracksList.push(
-              <Box p="5px">
-                <ListItem key='index'>
+              <Box p="8px">
+                <ListItem
+                key='index'
+                >
                   {message_string}
                 </ListItem>
               </Box>
@@ -155,8 +174,8 @@ export function TopTracksByArtist () {
             opacity={'100%'}
             m="3.5%"
             borderRadius="2%"
-            w='40%'
-            h='57%'
+            w='50%'
+            h='69%'
             alignContent={"center"}
             alignItems="center"
             overflow="hidden"
@@ -172,13 +191,17 @@ export function TopTracksByArtist () {
               borderRadius="8px"
               borderColor={'black'}
               >
-                <ModalHeader fontWeight={'bold'}> Artist's Top Tracks </ModalHeader>
+                <ModalHeader 
+                fontWeight={'bold'}
+                fontSize={'19px'}
+                as='u'
+                > Artist's Top Tracks </ModalHeader>
                 <List>
                   {artistTrackList}
                 </List>
 
               <Button
-              style={{ marginTop: -3}}
+              style={{ marginTop: 15}}
                onClick={onClose}>Close</Button>
 
               </VStack>
@@ -200,10 +223,12 @@ export function TopTracksByArtist () {
             align='stretch'
             color='black'
           >
-          <VStack height='374px'
+          <VStack height='369px'
           overflow="hidden" 
           overflowY={'scroll'}
-          			divider={<StackDivider borderColor='gray.200' />}>
+          divider={<StackDivider borderColor='gray.200' />}
+          sx={{marginRight:38}}
+          >
 
           
           <List color={'white'}>
@@ -216,7 +241,8 @@ export function TopTracksByArtist () {
             width="100%" 
             onClick={handleTopArtists} 
             id="artistButton"
-            style={{ marginTop: 15}}>
+            fontSize='17px'
+            style={{ marginTop: 2}}>
               Get My Top Artists!
           </Button>
           </Center>

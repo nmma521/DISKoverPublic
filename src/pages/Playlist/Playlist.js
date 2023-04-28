@@ -44,6 +44,8 @@ export function Playlist () {
         if (playlistName !== "") {
           spotifyApi.createPlaylist(playlistName, { 'description': playlistDesc, 'public': playlistPriv })
           .then(function(data) {
+            console.log(data)
+            console.log(data.body.id)
             console.log('playlist made');
             }, function(err) {
             console.log('fart\n', err);

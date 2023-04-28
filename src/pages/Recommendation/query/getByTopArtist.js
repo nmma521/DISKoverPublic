@@ -1,6 +1,6 @@
 import { useState } from "react"
 import React from "react"
-import { Button, Box, List, ListItem, Link, Input, Center, VStack, Container, StackDivider } from "@chakra-ui/react";
+import { Button, Box, List, ListItem, Link, Image, Input, Center, VStack, Container, StackDivider } from "@chakra-ui/react";
 import imageBackground from "../../WebApp/backgroundImg";
 
 export function GetByTopArtist () {
@@ -84,8 +84,10 @@ export function GetByTopArtist () {
                 </video>
                 </ListItem>
                 <ListItem>
-                <img src={track.album.images[0].url} width="100" height="100">
-                  </img>
+                <Image
+                 src={track.album.images[0].url} 
+                 width="35%" 
+                 />
                 </ListItem>
 
                 <ListItem key='index'>
@@ -150,8 +152,10 @@ export function GetByTopArtist () {
                     </ListItem>
 
                   <ListItem>
-                <img src={track.album.images[0].url} width="100" height="100">
-                  </img>
+                  <Image
+                 src={track.album.images[0].url} 
+                 width="35%" 
+                 />
                 </ListItem>
 
                 <ListItem key='index'>
@@ -241,7 +245,7 @@ export function GetByTopArtist () {
         color='black'>
 
         <VStack 
-        height='341px'
+        height='326px'
         overflow="hidden"
           overflowY={'scroll'}>
           <List
@@ -257,7 +261,8 @@ export function GetByTopArtist () {
         onClick={handleTopTracks}
         id="trackButton"
         width="100%"
-        style={{ marginTop: 15}}>
+        fontSize='17px'
+        style={{ marginTop: 11}}>
             Get Recommendations
         </Button>
         </Center>

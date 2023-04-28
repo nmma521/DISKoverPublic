@@ -2,13 +2,14 @@
 import Axios from "axios"
 import { useState } from "react"
 import React from "react"
-import { Button, Box, List, Link, ListItem, Input,Center, VStack, StackDivider } from "@chakra-ui/react";
+import { Button, Box, List, Link, ListItem, Image, Input,Center, VStack, StackDivider } from "@chakra-ui/react";
 import { Global } from "@emotion/react";
 
 
 export function TopTracks () {
 
   const [trackList, setList] = useState([])
+  const [trackIdList, setId] = useState([])
 
   const CLIENT_ID = "b3c1e974291a42c991e8c0d41c4f261d"//"d9f307b6668446e78096051746b9ff21"
   const SECRET_ID = "b82534052d72482fa9746e9b31e87c8b"//"980b6d0c977a40f4a77ccb4535d602b0"
@@ -44,6 +45,7 @@ export function TopTracks () {
           console.log(topTracks)
 
           var tracks = []
+          var trackIds = []
 
           topTracks.forEach(function(track, index) {
             var trackName = "" + track.name;
@@ -61,6 +63,11 @@ export function TopTracks () {
               }
             }
 
+            trackIds.push(
+              track.uri
+            );
+            setId(trackIds)
+
             if (track.preview_url != null) {
               tracks.push(
                 //[trackName, artistName, duration, explicit, url]
@@ -73,8 +80,10 @@ export function TopTracks () {
                 </ListItem>
 
                 <ListItem>
-                <img src={track.album.images[0].url} width="100" height="100">
-                  </img>
+                <Image
+                 src={track.album.images[0].url} 
+                 width="35%" 
+                 />
                 </ListItem>
 
                 <ListItem key='index'>
@@ -136,8 +145,11 @@ export function TopTracks () {
                     </ListItem>
 
                   <ListItem>
-                <img src={track.album.images[0].url} width="100" height="100">
-                  </img>
+                <Image 
+                src={track.album.images[0].url}
+                 width="100"
+                 >
+                </Image>
                 </ListItem>
 
                 <ListItem key='index'>
@@ -193,11 +205,13 @@ export function TopTracks () {
             setList(tracks)
 
           });
+
           console.log(trackList);
         }, function(err) {
           console.log('fart\n', err);
         })
     }
+
     function handleTopTracks(e) {
         getTheTopTracks(e)
         e.preventDefault();
@@ -213,9 +227,11 @@ export function TopTracks () {
               color='black'
       >
         <VStack 
-        height='374px'
+        height='369px'
         overflow="hidden"
-         overflowY={'scroll'}>
+         overflowY={'scroll'}
+         sx={{marginRight:38}}
+         >
         <List color={'black'}>
 
           {trackList}
@@ -229,7 +245,8 @@ export function TopTracks () {
          onClick={handleTopTracks} 
          id="trackButton"
           width="100%"
-          style={{ marginTop: 15}}
+          fontSize='17px'
+          style={{ marginTop: 2}}
 
          >Get My Top Tracks!
          </Button>

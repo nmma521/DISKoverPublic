@@ -32,7 +32,8 @@ const  Recommendation = () => {
           sx={{ borderRadius: "1.75%"}}
           >
             <Text
-            fontWeight='bold'>
+            fontWeight='bold'
+            fontSize='21px'>
             Select a tab and click the button at the bottom to get your results!
             </Text>
             <Text

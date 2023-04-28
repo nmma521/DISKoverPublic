@@ -12,6 +12,7 @@ import { Playlist } from "../Playlist/Playlist";
 import { yieldExpression } from "@babel/types";
 import { TopTracksByArtist } from "../top_tracks/TopTrackByArtist";
 import NavigationBar from "../../components/NavigationBar";
+import spotifyicons from "./img/spotifyigons.gif"
 
 
 //import querystring from 'querystring'
@@ -278,13 +279,23 @@ const WebApp = () => {
                      <Text>
                      </Text>
                     <Heading
-                    size={'6xl'}
-                    > Press Play </Heading>
+                    fontSize={'49px'}
+                    color='#48BB78'
+                    > Press Play 
+                     </Heading>
 
                     <Image
                     src={spotifyplaybutton}
-                    width={'10%'}
+                    width={'7%'}
                      onClick={handleLogin}
+                     />
+
+
+
+                    <Image
+                    src={spotifyicons}
+                    width={'9%'}
+
                      />
 
 
