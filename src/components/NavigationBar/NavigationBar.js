@@ -55,7 +55,7 @@ const NavigationBar = () => {
 
                   <Link to={ROUTES.TOP_TRACKS}>
                   <li variant="nav"> 
-                  View Top tracks 
+                  View Top Tracks 
                   </li>
                   </Link>
                   <Link to={ROUTES.RECOMMENDATION}>
